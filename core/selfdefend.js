@@ -1,23 +1,20 @@
 export function selfDefend(){
-
 return `
 
-(function(){
+;(function(){
 
 function guard(){
-
-const src=guard.toString()
-
+try{
+const src = guard.toString()
 if(!src.includes("guard")){
-while(true){}
+console.warn("Tamper detected")
+}
+}catch(e){}
 }
 
-}
-
-setInterval(guard,4000)
+setInterval(guard,5000)
 
 })();
 
 `;
-
 }
