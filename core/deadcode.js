@@ -1,6 +1,8 @@
-import traverse from "@babel/traverse";
+import traverseModule from "@babel/traverse";
 import * as t from "@babel/types";
 import { randomInt } from "../utils/random.js";
+
+const traverse = traverseModule.default;
 
 const patterns = [
 
@@ -17,7 +19,9 @@ const patterns = [
 
 ];
 
-for(let i=0;i<90;i++){
+/* generate nhiều pattern */
+
+for(let i=0;i<20;i++){
 
 patterns.push(`
 var _junk${i}=Math.random()*${randomInt(1,999)};
@@ -34,9 +38,11 @@ return patterns[Math.floor(Math.random()*patterns.length)];
 
 }
 
+/* AST deadcode */
+
 export function injectDeadCode(ast){
 
-traverse.default(ast,{
+traverse(ast,{
 
 BlockStatement(path){
 
@@ -76,14 +82,14 @@ path.node.body.unshift(fake);
 
 }
 
+/* runtime deadcode */
+
 export function generateDeadRuntime(){
 
 let out="";
 
-for(let i=0;i<30;i++){
-
+for(let i=0;i<10;i++){
 out+=randomPattern()+"\n";
-
 }
 
 return out;
