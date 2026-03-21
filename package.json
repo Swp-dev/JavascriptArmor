@@ -1,37 +1,29 @@
 {
   "name": "jsarmor",
-  "version": "1.0.4",
+  "version": "2.0.2",
   "description": "Advanced JavaScript Obfuscator",
   "type": "module",
-
   "main": "cli/index.js",
-
   "bin": {
     "jsarmor": "./cli/index.js"
   },
-
   "scripts": {
     "start": "node cli/index.js"
   },
-
   "repository": {
     "type": "git",
     "url": "https://github.com/Swp-dev/JavascriptArmor.git"
   },
-
   "homepage": "https://github.com/Swp-dev/JavascriptArmor",
-
   "bugs": {
     "url": "https://github.com/Swp-dev/JavascriptArmor/issues"
   },
-
   "files": [
     "cli",
     "core",
     "utils",
     "docs"
   ],
-
   "keywords": [
     "javascript",
     "obfuscator",
@@ -39,18 +31,16 @@
     "protection",
     "jsarmor"
   ],
-
   "author": "_kingktn",
-
   "license": "SEE LICENSE IN LICENSE",
-
   "dependencies": {
+    "@babel/generator": "^7.26.0",
     "@babel/parser": "^7.26.0",
     "@babel/traverse": "^7.26.0",
     "@babel/types": "^7.26.0",
-    "@babel/generator": "^7.26.0",
     "chalk": "^5.3.0",
+    "cli-progress": "^3.12.0",
     "gradient-string": "^2.0.2",
-    "cli-progress": "^3.12.0"
+    "os": "^0.1.2"
   }
 }
