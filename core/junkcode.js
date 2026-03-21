@@ -1,18 +1,19 @@
-export function generateJunk() {
+export function generateJunk(){
 
-  const junk = [];
+return `
 
-  for (let i = 0; i < 20; i++) {
+var _假=Math.random()
 
-    junk.push(`
-var _junk${i} = Math.random() * ${i};
-if(_junk${i} > 9999){
- console.log(_junk${i});
+function _伪(){
+try{
+return Function("return 1+1")()
+}catch(e){}
 }
-`);
 
-  }
+if(_假>2){
+console.log(_伪())
+}
 
-  return junk.join("\n");
+`
 
 }
