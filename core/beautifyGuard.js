@@ -1,21 +1,17 @@
 export function antiBeautify(){
-
 return `
 
-(function(){
+;(function(){
 
 const start=Date.now()
-
 debugger
-
 const end=Date.now()
 
-if(end-start>100){
-while(true){}
+if(end-start>1000){
+console.warn("Debug detected")
 }
 
 })();
 
 `;
-
 }
