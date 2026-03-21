@@ -93,24 +93,13 @@ Function(path){
   });
 
   const whileLoop = t.whileStatement(
-    t.booleanLiteral(true),
-    t.blockStatement([
-
-      t.switchStatement(
-        t.identifier("_s"),
-        cases
-      ),
-
-      t.ifStatement(
-        t.binaryExpression(
-          ">=",
-          t.identifier("_s"),
-          t.numericLiteral(body.length)
-        ),
-        t.breakStatement()
-      )
-
-    ])
+  t.binaryExpression("<", t.identifier("_s"), t.numericLiteral(body.length)),
+  t.blockStatement([
+    t.switchStatement(
+      t.identifier("_s"),
+      cases
+    )
+  ])
   );
 
   const newBody = [];
