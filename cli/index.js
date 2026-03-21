@@ -19,6 +19,9 @@ import { injectDeadCode, generateDeadRuntime } from "../core/deadcode.js";
 import { injectAntiDebug } from "../core/antidebug.js";
 import { antiBeautify } from "../core/beautifyGuard.js";
 import { selfDefend } from "../core/selfdefend.js";
+import { unicodeIdentifiers } from "../core/unicodeIdentifier.js";
+import { buildStringRuntime } from "../core/stringRuntime.js";
+import { antiVM } from "../core/antivm.js";
 
 import { watermark } from "../utils/watermark.js";
 
@@ -107,12 +110,15 @@ barCompleteChar:"█",
 barIncompleteChar:"░"
 });
 
-bar.start(6,0);
+bar.start(7,0);
 
 const ast = parseCode(code);
 bar.increment();
 
 renameVariables(ast);
+bar.increment();
+
+unicodeIdentifiers(ast);
 bar.increment();
 
 const pool = encodeStrings(ast);
@@ -143,8 +149,9 @@ const final =
 watermark(user) +
 injectAntiDebug() +
 antiBeautify() +
+antiVM() +
 selfDefend() +
-`var _STRINGS=${JSON.stringify(pool)};\n` +
+buildStringRuntime(pool) +
 runtimeJunk +
 generateJunk() +
 output;
