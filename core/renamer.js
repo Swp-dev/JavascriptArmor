@@ -1,4 +1,5 @@
 import traverseModule from "@babel/traverse";
+import * as t from "@babel/types";
 
 const traverse = traverseModule.default;
 
@@ -15,48 +16,130 @@ const reserved = new Set([
 "setInterval"
 ]);
 
+/* multilingual identifier */
+
+const jp = "あいうえおかきくけこさしすせそたちつてと";
+const kr = "가나다라마바사아자차카타파하";
+const cn = "的一是在不了有和人这中大为上个国我以要他";
+const latin = "abcdefghijklmnopqrstuvwxyz";
+
+const pool = jp + kr + cn + latin;
+
 function randomName(){
-const chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-let name="_";
+let name="_0x";
 for(let i=0;i<6;i++){
-name+=chars[Math.floor(Math.random()*chars.length)];
+name+=pool[Math.floor(Math.random()*pool.length)];
 }
 return name;
 }
 
 export function renameVariables(ast){
 
+const renamed = new Map();
+
 traverse(ast,{
-Program(path){
 
-  const bindings = path.scope.bindings;
+Identifier(path){
 
-  for(const key in bindings){
+// chỉ rename binding identifier
+if(!path.isBindingIdentifier()) return;
 
-    const binding = bindings[key];
+const name = path.node.name;
 
-    if(reserved.has(key)) continue;
+// skip reserved
+if(reserved.has(name)) return;
 
-    // skip imports
-    if(binding.path.isImportSpecifier?.()) continue;
-    if(binding.path.isImportDefaultSpecifier?.()) continue;
-    if(binding.path.isImportNamespaceSpecifier?.()) continue;
+// skip already obfuscated
+if(name.startsWith("_0x")) return;
 
-    // skip function parameters
-    if(binding.kind === "param") continue;
+// skip short names (tránh phá scope nhỏ)
+if(name.length < 3) return;
 
-    // skip destructuring
-    if(binding.path.isObjectPattern?.()) continue;
-    if(binding.path.isArrayPattern?.()) continue;
+const binding = path.scope.getBinding(name);
+if(!binding) return;
 
-    // skip globals
-    if(!binding.scope.parent) continue;
+// skip params
+if(binding.kind === "param") return;
 
-    const newName=randomName();
+// skip global scope
+if(!binding.scope.parent) return;
 
-    path.scope.rename(key,newName);
+// skip mutated variables (tránh break logic)
+if(binding.constantViolations && binding.constantViolations.length > 0){
+    return;
+}
 
-  }
+// skip if already renamed
+if(renamed.has(binding)){
+    return;
+}
+
+const newName = randomName();
+
+try{
+path.scope.rename(name,newName);
+renamed.set(binding,newName);
+}catch{}
+
+},
+
+FunctionDeclaration(path){
+
+if(!path.node.id) return;
+
+const name = path.node.id.name;
+
+if(reserved.has(name)) return;
+if(name.startsWith("_0x")) return;
+
+const binding = path.scope.getBinding(name);
+if(!binding) return;
+
+if(binding.constantViolations && binding.constantViolations.length > 0){
+    return;
+}
+
+if(renamed.has(binding)) return;
+
+const newName = randomName();
+
+try{
+path.scope.rename(name,newName);
+renamed.set(binding,newName);
+}catch{}
+
+},
+
+ClassDeclaration(path){
+
+if(!path.node.id) return;
+
+const name = path.node.id.name;
+
+if(reserved.has(name)) return;
+if(name.startsWith("_0x")) return;
+
+const binding = path.scope.getBinding(name);
+if(!binding) return;
+
+if(binding.constantViolations && binding.constantViolations.length > 0){
+    return;
+}
+
+if(renamed.has(binding)) return;
+
+const newName = randomName();
+
+try{
+path.scope.rename(name,newName);
+renamed.set(binding,newName);
+}catch{}
+
+}
+
+});
+
+}
 
 }
 });
