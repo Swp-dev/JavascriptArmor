@@ -1,15 +1,13 @@
 export function injectAntiDebug(){
-
 return `
 
-(function(){
+;(function(){
 setInterval(function(){
 try{
-(function(){debugger})()
+debugger;
 }catch(e){}
-},2000)
+},3000) 
 })();
 
 `;
-
 }
