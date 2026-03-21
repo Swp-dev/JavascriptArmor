@@ -17,11 +17,7 @@ export function unicodeEscape(ast){
     StringLiteral(path){
 
       const val = path.node.value;
-
-      path.node.extra = {
-        raw: `"${toUnicode(val)}"`,
-        rawValue: val
-      };
+      if(val.includes("_解密")) return;
 
     }
   });
