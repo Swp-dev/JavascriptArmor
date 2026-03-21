@@ -122,6 +122,7 @@ jsarmor
  │  └ index.js
  ├ core/
  │  ├ antidebug.js
+ │  ├ antivm.js
  │  ├ beautifyGuard.js
  │  ├ controlflow.js
  │  ├ deadcode.js
@@ -132,7 +133,9 @@ jsarmor
  │  ├ runtime.js
  │  ├ selfdefend.js
  │  ├ stringArray.js
- │  └ unicode.js
+ │  ├ stringRuntime.js
+ │  ├ unicode.js
+ │   └ unicodeIdentifier.js 
  └ utils/
     ├ random.js
     └ waternark.js
