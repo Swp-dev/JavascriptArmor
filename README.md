@@ -1,5 +1,5 @@
 <p align="center">
-<img src="docs/banner.jpg" width="300">
+<img src="docs/jsarmorbanner.jpg" width="400">
 </p>
 
 <h1 align="center">JSArmor</h1>
