@@ -188,25 +188,27 @@ If you encounter issues or have questions:
 
 Open an issue on GitHub in [here](https://github.com/Swp-dev/JavascriptArmor/issues).
 
-For direct contact:
+# 🌐 Contact me
 
-Link Bio
+<p align="center">
 
-```
-https://eboy.asia/p.n
-```
+<a href="https://discord.com/users/1234144932176855040">
+<img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"/>
+</a>
 
-GitHub
+<a href="https://tiktok.com/@niemtinthatxaxi">
+<img src="https://img.shields.io/badge/TikTok-black?style=for-the-badge&logo=tiktok&logoColor=white"/>
+</a>
 
-```
-https://github.com/Swp-dev/JavascriptArmor
-```
+<a href="https://github.com/Swp-dev">
+<img src="https://img.shields.io/badge/GitHub-000?style=for-the-badge&logo=github"/>
+</a>
 
-Follow me on the tiktok
+<a href="https://nhavua.vercel.app">
+<img src="https://img.shields.io/badge/Website-00C7B7?style=for-the-badge&logo=google-chrome&logoColor=white"/>
+</a>
 
-```
-https://tiktok.com/@niemtinthatxaxi
-```
+</p>
 
 ---
 
